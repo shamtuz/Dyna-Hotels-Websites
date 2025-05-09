@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dyna Hotel - About</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Lora&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #d81b60, #0288d1);
+        }
+        .hero {
+            height: 50vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1563241511-7e90e5edb97c?w=800') no-repeat center/cover;
+        }
+        .content {
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+            text-align: center;
+        }
+        .card {
+            max-width: 600px;
+            margin: 20px auto;
+        }
+        .card p {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+        @media (max-width: 768px) {
+            .hero { height: 30vh; }
+            .card { margin: 10px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <canvas id="logoCanvas" width="100" height="100"></canvas>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="rooms.html">Rooms</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="bookings.html">Bookings</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section class="hero">
+        <h1>About Dyna Hotel</h1>
+    </section>
+    <section class="content">
+        <div class="card">
+            <p>Dyna Hotel is a vibrant retreat in Kenya, blending global cuisines with authentic Swahili flavors. Established in 2015, we offer luxurious stays and unforgettable dining experiences, inspired by the rich culture and natural beauty of Kenya.</p>
+        </div>
+        <div class="card">
+            <p>Our mission is to create a home away from home, where every guest feels the warmth of Kenyan hospitality. Join us to explore a world of flavors and comfort!</p>
+        </div>
+    </section>
+    <footer>
+        <p>© 2025 Dyna Hotel. All Rights Reserved.</p>
+    </footer>
+    <script src="scripts.js"></script>
+    <script>
+        const canvas = document.getElementById('logoCanvas');
+        const ctx = canvas.getContext('2d');
+        let time = 0;
+
+        function drawAboutLogo() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.save();
+            ctx.translate(50, 50);
+
+            ctx.beginPath();
+            ctx.arc(0, 0, 45, 0, Math.PI * 2);
+            ctx.fillStyle = '#0288d1';
+            ctx.fill();
+
+            ctx.beginPath();
+            ctx.moveTo(0, 20);
+            ctx.lineTo(0, -20);
+            ctx.strokeStyle = '#d81b60';
+            ctx.lineWidth = 5;
+            ctx.stroke();
+
+            ctx.save();
+            ctx.rotate(Math.sin(time / 20) * 0.1);
+            ctx.beginPath();
+            ctx.moveTo(0, -20);
+            ctx.lineTo(-15, -35);
+            ctx.moveTo(0, -20);
+            ctx.lineTo(15, -35);
+            ctx.strokeStyle = '#d81b60';
+            ctx.lineWidth = 3;
+            ctx.stroke();
+            ctx.restore();
+
+            ctx.beginPath();
+            ctx.arc(0, 0, 10 + 2 * Math.sin(time / 10), 0, Math.PI * 2);
+            ctx.fillStyle = '#ffca28';
+            ctx.fill();
+
+            ctx.restore();
+            time += 0.1;
+            requestAnimationFrame(drawAboutLogo);
+        }
+        drawAboutLogo();
+    </script>
+</body>
+</html>

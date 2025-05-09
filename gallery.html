@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dyna Hotel - Gallery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Lora&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f06292, #ff6f00);
+        }
+        .hero {
+            height: 50vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1519046904884-53103b34b206?w=800') no-repeat center/cover;
+        }
+        .gallery {
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .gallery-card {
+            padding: 10px;
+            overflow: hidden;
+        }
+        .gallery-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        .gallery-card:hover {
+            transform: scale(1.05);
+        }
+        @media (max-width: 768px) {
+            .hero { height: 30vh; }
+            .gallery-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <canvas id="logoCanvas" width="100" height="100"></canvas>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="rooms.html">Rooms</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="bookings.html">Bookings</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section class="hero">
+        <h1>Gallery</h1>
+    </section>
+    <section class="gallery">
+        <div class="gallery-grid">
+            <div class="card gallery-card">
+                <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800" alt="Hotel Dining Area">
+            </div>
+            <div class="card gallery-card">
+                <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=800" alt="Deluxe Suite Interior">
+            </div>
+            <div class="card gallery-card">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800" alt="Hotel Pool Area">
+            </div>
+            <div class="card gallery-card">
+                <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=800" alt="Swahili Cultural Festival">
+            </div>
+        </div>
+    </section>
+    <footer>
+        <p>© 2025 Dyna Hotel. All Rights Reserved.</p>
+    </footer>
+    <script src="scripts.js"></script>
+    <script>
+        const canvas = document.getElementById('logoCanvas');
+        const ctx = canvas.getContext('2d');
+        let angle = 0;
+
+        function drawGalleryLogo() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.save();
+            ctx.translate(50, 50);
+
+            ctx.beginPath();
+            ctx.arc(0, 0, 45, 0, Math.PI * 2);
+            ctx.fillStyle = '#f06292';
+            ctx.fill();
+
+            ctx.save();
+            ctx.rotate(angle * Math.PI / 180);
+            for (let i = 0; i < 10; i++) {
+                ctx.beginPath();
+                ctx.moveTo(35, 0);
+                ctx.lineTo(45, 0);
+                ctx.strokeStyle = '#ff6f00';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                ctx.rotate(Math.PI / 5);
+            }
+            ctx.restore();
+
+            const apertureSize = 15 + 5 * Math.sin(Date.now() / 500);
+            ctx.beginPath();
+            ctx.arc(0, 0, apertureSize, 0, Math.PI * 2);
+            ctx.fillStyle = '#ffeb3b';
+            ctx.fill();
+
+            angle += 1;
+            requestAnimationFrame(drawGalleryLogo);
+        }
+        drawGalleryLogo();
+    </script>
+</body>
+</html>

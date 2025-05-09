@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dyna Hotel - Events</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Lora&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #0288d1, #f06292);
+        }
+        .hero {
+            height: 50vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=800') no-repeat center/cover;
+        }
+        .events {
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+        .event-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .event-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .event-card h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 24px;
+            color: #ffeb3b;
+        }
+        .event-card p {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        @media (max-width: 768px) {
+            .hero { height: 30vh; }
+            .event-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <canvas id="logoCanvas" width="100" height="100"></canvas>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="rooms.html">Rooms</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="bookings.html">Bookings</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section class="hero">
+        <h1>Upcoming Events</h1>
+    </section>
+    <section class="events">
+        <div class="event-grid">
+            <div class="card event-card">
+                <img src="https://images.unsplash.com/photo-1606851441827-7a1d79e69316?w=800" alt="Swahili Food Festival">
+                <h3>Swahili Food Festival</h3>
+                <p>Join us on June 15, 2025, for a celebration of coastal flavors.</p>
+            </div>
+            <div class="card event-card">
+                <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=800" alt="Cultural Night">
+                <h3>Cultural Night</h3>
+                <p>Experience Kenyan music and dance on July 20, 2025.</p>
+            </div>
+            <div class="card event-card">
+                <img src="https://images.unsplash.com/photo-1583394833716-76b6e7c98f0f?w=800" alt="Wine Tasting">
+                <h3>Wine Tasting</h3>
+                <p>Sample global wines on August 10, 2025.</p>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <p>© 2025 Dyna Hotel. All Rights Reserved.</p>
+    </footer>
+    <script src="scripts.js"></script>
+    <script>
+        const canvas = document.getElementById('logoCanvas');
+        const ctx = canvas.getContext('2d');
+        let angle = 0;
+
+        function drawEventsLogo() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.save();
+            ctx.translate(50, 50);
+
+            ctx.beginPath();
+            ctx.arc(0, 0, 45, 0, Math.PI * 2);
+            ctx.fillStyle = '#0288d1';
+            ctx.fill();
+
+            ctx.save();
+            ctx.rotate(angle * Math.PI / 180);
+            for (let i = 0; i < 8; i++) {
+                ctx.beginPath();
+                ctx.moveTo(35, 0);
+                ctx.lineTo(45, 0);
+                ctx.strokeStyle = '#f06292';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                ctx.rotate(Math.PI / 4);
+            }
+            ctx.restore();
+
+            const scale = 1 + 0.05 * Math.sin(Date.now() / 200);
+            ctx.save();
+            ctx.scale(scale, scale);
+            ctx.beginPath();
+            ctx.arc(0, 0, 20, 0, Math.PI * 2);
+            ctx.fillStyle = '#ffeb3b';
+            ctx.fill();
+            ctx.restore();
+
+            angle += 1;
+            requestAnimationFrame(drawEventsLogo);
+        }
+        drawEventsLogo();
+    </script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dyna Hotel - Bookings</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Lora&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #26a69a, #ff6f00);
+        }
+        .hero {
+            height: 50vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?w=800') no-repeat center/cover;
+        }
+        .bookings {
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+            text-align: center;
+        }
+        .booking-card {
+            max-width: 600px;
+            margin: auto;
+        }
+        @media (max-width: 768px) {
+            .hero { height: 30vh; }
+            .booking-card { margin: 10px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <canvas id="logoCanvas" width="100" height="100"></canvas>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="rooms.html">Rooms</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="bookings.html">Bookings</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section class="hero">
+        <h1>Book Your Stay</h1>
+    </section>
+    <section class="bookings">
+        <div class="card booking-card">
+            <input type="text" placeholder="Full Name" required>
+            <input type="email" placeholder="Email" required>
+            <select required>
+                <option value="" disabled selected>Select Room Type</option>
+                <option value="deluxe">Deluxe Suite</option>
+                <option value="standard">Standard Room</option>
+                <option value="family">Family Suite</option>
+            </select>
+            <input type="date" required>
+            <button onclick="alert('Booking Submitted!')">Submit Booking</button>
+        </div>
+    </section>
+    <footer>
+        <p>© 2025 Dyna Hotel. All Rights Reserved.</p>
+    </footer>
+    <script src="scripts.js"></script>
+    <script>
+        const canvas = document.getElementById('logoCanvas');
+        const ctx = canvas.getContext('2d');
+        let time = 0;
+
+        function drawBookingsLogo() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.save();
+            ctx.translate(50, 50);
+
+            ctx.beginPath();
+            ctx.arc(0, 0, 45, 0, Math.PI * 2);
+            ctx.fillStyle = '#26a69a';
+            ctx.fill();
+
+            ctx.beginPath();
+            ctx.rect(-20, -25, 40, 50);
+            ctx.fillStyle = '#ff6f00';
+            ctx.fill();
+            ctx.beginPath();
+            ctx.rect(-20, -25, 40, 10);
+            ctx.fillStyle = '#fff';
+            ctx.fill();
+
+            ctx.save();
+            ctx.rotate(Math.sin(time / 20) * 0.05);
+            ctx.beginPath();
+            ctx.rect(-18, -23, 36, 46);
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
+            ctx.fill();
+            ctx.restore();
+
+            const scale = 1 + 0.1 * Math.sin(time / 10);
+            ctx.save();
+            ctx.scale(scale, scale);
+            ctx.beginPath();
+            ctx.moveTo(-10, 0);
+            ctx.lineTo(0, 10);
+            ctx.lineTo(15, -10);
+            ctx.strokeStyle = '#ffeb3b';
+            ctx.lineWidth = 5;
+            ctx.stroke();
+            ctx.restore();
+
+            time += 0.1;
+            requestAnimationFrame(drawBookingsLogo);
+        }
+        drawBookingsLogo();
+    </script>
+</body>
+</html>
